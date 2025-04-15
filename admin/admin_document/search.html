@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>البحث عن الطالب</title>
+    <link href="img/un1.jpg" rel="icon">
+
+    <!-- Bootstrap core CSS-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="css/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-rtl.css">
+
+
+</head>
+
+<body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+        <a class="navbar-brand mr-1" href="indexduc.php">ادارة الوثائق</a>
+
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars">
+
+
+
+            </i>
+        </button>
+
+        <!-- Navbar Search -->
+
+
+        <!-- Navbar -->
+
+
+
+    </nav>
+
+
+
+
+
+
+
+
+
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-">
+            <li class="nav-item active">
+                <a class="nav-link" href="indexduc.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>االادارة</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="showdata.php">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>بيانات الطلاب للعرض </span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="sendemail.php">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>ارسال رسالة عبر الايميل </span></a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="search.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>البحث عن الطلاب</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>الصفحات</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <h6 class="dropdown-header">العامه</h6>
+
+                    <a class="dropdown-item" href="../../index.php">الصفحة الرئيسية </a>
+                    <a class="dropdown-item" href="../../managmentdatacertifect/datamanag.php">تسجيل طالب</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">صفحة اخرء:</h6>
+                    <a class="dropdown-item" href="404.html">الاخبار </a>
+                    <a class="dropdown-item" href="blank.html">Blank Page</a>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="showall.php">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>عرض كل البيانات في قاعدة البيانات</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href=logout.php">
+                    <i class="fas fa-fw fa-chart-serch"></i>
+                    <span> خروج</span></a>
+            </li>
+
+            </li>
+
+
+
+        </ul>
+
+        <div id="content-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">ادارة الوثائق</a>
+                    </li>
+                    <li class="breadcrumb-item active">البحث</li>
+                </ol>
+
+                <!-- Area Chart Example-->
+
+
+
+
+
+
+
+
+
+
+
+                <!-- خاص بلبحث-->
+                <center>
+                    <form action="" method="post">
+                        <input type="text" name="search">
+                        <input type='submit' name="submit1" value="search !!">
+                        <?php
+
+                        if (isset($_POST["submit1"])) {
+                        ?>
+                    </form>
+                </center>
+
+                <h1>بيانات التي تظهر للموظف </h1>
+
+                <table callpading='11' width='100%' height='100%' border='5px solid #000' bgcolor='#fff'
+                    bordercolor='#f03'>
+                    <thead>
+                        <th>id</th>
+                        <th>الاسم</th>
+                        <th>الرقم الاكاديمي</th>
+                        <th>الكلية</th>
+                        <th>القسم</th>
+                        <th>رقم الهاتف</th>
+                        <th>سند رسوم الشهادة</th>
+                        <th>اخلا طرف</th>
+                        <th> عرض صفحة الطالب </th>
+                        <th> حذف البيانات </th>
+
+                    </thead>
+                    <?php
+                            $searchkey = $_POST['search'];
+                            //  include "conectdb/concte.php";
+
+
+                            $ala = mysqli_connect('localhost', 'root');
+                            $con = mysqli_select_db($ala, 'databaseunivercetytaiz');
+
+
+                            $sqk = mysqli_query($ala, "SELECT  * FROM aplouddd WHERE namee LIKE '%$searchkey%' or numberunvers  LIKE '%$searchkey%' or college  LIKE '%$searchkey%'or departmen  LIKE '%$searchkey%'or phonenumber  LIKE '%$searchkey%' ");
+                            while ($result = mysqli_fetch_array($sqk)) {
+                    ?>
+                    <tbody>
+
+
+                        <tr>
+                            <td>
+                                <?php echo $result['id']; ?>
+                            </td>
+                            <td>
+                                <?php echo $result['namee']; ?>
+                            </td>
+                            <td>
+                                <?php echo $result['numberunvers']; ?>
+                            </td>
+                            <td>
+                                <?php echo $result['college']; ?>
+                            </td>
+                            <td>
+                                <?php echo $result['departmen']; ?>
+                            </td>
+                            <td>
+                                <?php echo $result['phonenumber']; ?>
+                            </td>
+                            <td> <img src="<?php echo $result['image']; ?> " height="100px" while="100px"></td>
+                            <td> <img src="<?php echo $result['ef']; ?> " height="100px" while="100px"></td>
+                            <td><button width="100px" name="submit" height="90%" color='#fff' bordercolor='#f03'>
+                                    <?php echo "  <a href='datastudentdata.php?id=" . $result['id'] . "'> عرض البيانات</a> "; ?>
+                                </button></td>
+                            <td><button width="100px" height="90%" color='#fff' value="news" bordercolor='#f00'>
+                                    <?php echo "  <a href='datastudentdata.php?delete=news&id=" . $result['id'] . "'> حذف البيانات</a>"; ?>
+                                </button></td>
+                            <input type="hidden" name="news" value='news'>
+
+
+                        </tr>
+                        <?php
+                            }
+                        }
+
+                        // mysqli_free_result($quyredesplay);
+                        // mysqli_close($ala);
+                    ?>
+                    </tbody>
+                </table>
+
+
+
+
+
+
+
+
+
+
+
+
+                <p class="small text-center text-muted my-5">
+                    <em>البحث في قاعدة البيانات...</em>
+                </p>
+
+            </div>
+            <!-- /.container-fluid -->
+
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span style="color: black; font-weight: bold;">نيابة شؤون الطلاب @ جامعة تعز </span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="js/Chart.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+
+</body>
+
+</html>

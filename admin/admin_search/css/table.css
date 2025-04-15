@@ -1,0 +1,13 @@
+.tabl{
+    
+border:2px solid #000;
+text-align:center;
+width:1000px;
+height:200px;
+background-color:tan;
+}
+img{
+    width:280px;
+    height:280px;
+    border:solid #000;
+    }

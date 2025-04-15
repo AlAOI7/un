@@ -1,0 +1,39 @@
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+
+//if (isset($_POST['name']) && isset($_POST['email'])) {
+$name = $_POST['name'];
+$email = $_POST['email'];
+$subject = $_POST['subject'];
+$body = $_POST['body'];
+require_once "PHPMailer/Exception.php";
+require_once "PHPMailer/PHPMailer.php";
+require_once "PHPMailer/SMTP.php";
+
+$mail = new PHPMailer();
+/////smtp setting
+$mail->isSMTP();
+$mail->Host = "smtp.gmail.com"; // البريد الخاص بلجهاز 
+$mail->SMTPAuth = true;
+$mail->Username = "alaoi77alshoga@gmail.com";
+$mail->Password = 'yourpassword';
+$mail->Port = 465;
+$mail->SMTPSecure = "ssl"; //tls
+////////// email setting
+$mail->isHTML(true);
+$mail->setFrom($email, $name);
+$mail->addAddress("alaoi77alshoga@mgail.com");
+$mail->Subject = (" $email ( $subject )");
+$mail->Body = $body;
+
+if ($mail->send()) {
+    $status = "success";
+    $response = "Email is send!";
+} else {
+
+    $status = "failed";
+    $response = "something is wrong :<br> " . $mail->ErrorInfo;
+}
+exit(json_encode(array("status" => $status, "response" => $response)));
+//}
